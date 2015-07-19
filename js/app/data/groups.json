@@ -1,0 +1,42 @@
+[
+    {
+        "type": "label",
+        "name": "LABEL1"
+    },
+    {
+        "type": "acg",
+        "name": "ACG1"
+    },
+    {
+        "type": "acg",
+        "name": "ACG2"
+    },
+    {
+        "type": "acg",
+        "name": "ACG3"
+    },
+    {
+        "type": "other",
+        "name": "OTHER1"
+    },
+    {
+        "type": "other",
+        "name": "OTHER2"
+    },
+    {
+        "type": "other",
+        "name": "OTHER3"
+    },
+    {
+        "type": "other",
+        "name": "OTHER4"
+    },
+    {
+        "type": "other",
+        "name": "OTHER5"
+    },
+    {
+        "type": "other",
+        "name": "OTHER6"
+    }
+]

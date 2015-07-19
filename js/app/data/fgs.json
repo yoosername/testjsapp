@@ -1,0 +1,17 @@
+[
+    {
+        "id": "1",
+        "name": "name1",
+        "owner": "owner1",
+        "groups": [
+            {
+                "type": "acg",
+                "name": "ACG1"
+            },
+            {
+                "type": "acg",
+                "name": "ACG2"
+            }
+        ]
+    }
+]

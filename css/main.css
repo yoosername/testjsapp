@@ -1,0 +1,61 @@
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+}
+
+.group{
+	margin-right: 2px;
+}
+
+.tags-left{
+  display: inline;
+}
+
+.tags-right{
+  display:inline;
+}
+
+input.tags-input{
+  display: inline;
+  width: auto;
+}
+
+.container {
+  width: 800px;
+  margin: 50px auto;
+}
+.typeahead-wrapper {
+  display: block;
+  margin: 50px 0;
+}
+.tt-menu {
+  background-color: #fff;
+  border: 1px solid #000;
+  padding:20px;
+}
+.tt-suggestion.tt-cursor {
+  background-color: #ccc;
+}
+.triggered-events {
+  float: right;
+  width: 500px;
+  height: 300px;
+}
