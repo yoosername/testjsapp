@@ -20,6 +20,10 @@ define([
       this.listenTo(this.collection, 'reset', this.render);
       this.listenTo(this.collection, 'add', this.renderSingle);
     },
+
+    events: {
+      'click #fgs-create':'submitForm'
+    },
     
     // Called by a collection reset event. 
     // Loop through models and attach View for each dependent on type
@@ -32,26 +36,32 @@ define([
       // Loop through each item in the collection and inject relevant view
       this.collection.forEach(this.renderSingle,this);
 
-      // Configure Automcomplete
+      // Configure Automcomplete after fetching collection to use
       var that = this;
       this.availableGroups.fetch({
         success:function(){
-          console.log("success");
-          that.configureAutoComplete();
+          console.log("AutoComplete collection fetched");
+          that.configureACGAutoComplete();
+          that.configureLabelAutoComplete();
         }
       });
 
       return this;
     },
 
-    configureAutoComplete(){
+    submitForm: function(){
+      // Submit the JSON from the collection to the server
+      console.log("Form Submitted: NOT IMPLEMENTED YET");
+    },
 
-      console.log("Configuring Autocomplete");
+    configureACGAutoComplete: function(){
+
+      console.log("Configuring Autocomplete for acgs");
       var that = this;
       var groups = [];
       var map = {};
 
-      this.$el.find(".tags-input").typeahead({
+      this.$el.find("#acgs").typeahead({
         hint: true,
         highlight: true,
         minLength: 1
@@ -61,8 +71,10 @@ define([
         source: function(query, process){
 
           $.each(that.availableGroups.toJSON(), function(i, group){
-            map[group.name] = group;
-            groups.push(group.name);
+            if(group.type == "acg"){
+              map[group.name] = group;
+              groups.push(group.name);
+            }
           });
 
           process(groups);
@@ -70,9 +82,44 @@ define([
       });
 
       // Handle selected
-      $('.tags-input').on('typeahead:selected', function (e, datum) {
+      $('#acgs').on('typeahead:selected', function (e, datum) {
         that.collection.add(map[datum]);
-        $('.tags-input').val("");
+        $('#acgs').typeahead('val', '')
+      });
+
+    },
+
+    configureLabelAutoComplete: function(){
+
+      console.log("Configuring Autocomplete for labels");
+      var that = this;
+      var groups = [];
+      var map = {};
+
+      this.$el.find("#labels").typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 1
+      },
+      {
+        name: 'groups',
+        source: function(query, process){
+
+          $.each(that.availableGroups.toJSON(), function(i, group){
+            if(group.type == "label"){
+              map[group.name] = group;
+              groups.push(group.name);
+            }
+          });
+
+          process(groups);
+        }
+      });
+
+      // Handle selected
+      $('#labels').on('typeahead:selected', function (e, datum) {
+        that.collection.add(map[datum]);
+        $('#labels').typeahead('val', '')
       });
 
     },
@@ -87,6 +134,12 @@ define([
           console.log("type is acg");
           var acgGroup = new GroupView({model:group,collection:this.collection});
           this.$el.find("#acgtags").append(acgGroup.render().$el)
+        }
+
+        if(group.attributes.type == "label"){
+          console.log("type is label");
+          var labelGroup = new GroupView({model:group,collection:this.collection});
+          this.$el.find("#labeltags").append(labelGroup.render().$el)
         }
     }
 
